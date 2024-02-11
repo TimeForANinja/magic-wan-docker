@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     frr \
     wireguard \
-    python3 \
+    python3 python3-pip \
     procps \
     && rm -rf /var/lib/apt/lists/*
 
