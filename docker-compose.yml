@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  my_container:
+    image: magic-wan-docker
+    volumes:
+      - ./path/to/config/file/config.yml:/magic-wan/config.yml:ro
+    entrypoint: /entrypoint.sh

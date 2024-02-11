@@ -1,0 +1,10 @@
+idx: 2
+privatekey: "private_key_for_node_1"
+router_net: "172.31.0.0/24"
+peers:
+  - idx: 4
+    public_key: "public_key_for_node_2"
+    destination: "example.com"
+  - idx: 5
+    public_key: "public_key_for_node_3"
+    destination: "203.0.113.10"
