@@ -7,6 +7,7 @@ RUN apt-get update && \
     frr \
     wireguard \
     python3 \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 # Create magic-wan directory
@@ -14,6 +15,8 @@ RUN mkdir -p /magic-wan
 
 # Copy necessary files to magic-wan directory
 COPY scripts/* /magic-wan/
+# Install python script requirements
+RUN pip install --no-cache-dir pyyaml
 
 # Set the entrypoint script
 RUN chmod +x /magic-wan/*.sh

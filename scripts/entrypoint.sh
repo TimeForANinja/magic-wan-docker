@@ -24,13 +24,15 @@ echo "FRR configuration built."
 # Start WireGuard service
 echo "Starting WireGuard service..."
 # Example command to start WireGuard service
-systemctl start wg-quick@wg1*
+for wg_cfg in /etc/wireguard/wg*.conf; do
+    wg-quick up "$wg_cfg"
+done
 echo "WireGuard service started."
 
 # Start FRR service
 echo "Starting FRR service..."
 # Example command to start FRR service
-systemctl start frr
+/usr/lib/frr/frrinit.sh start
 echo "FRR service started."
 
 # Keep the container running
