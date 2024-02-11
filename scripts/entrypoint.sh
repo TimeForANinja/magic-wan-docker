@@ -35,5 +35,8 @@ echo "Starting FRR service..."
 /usr/lib/frr/frrinit.sh start
 echo "FRR service started."
 
-# Keep the container running
-watch -n 10 /magic-wan/debug.sh
+# Keep the container running & print debug log every few seconds
+while true; do
+    /magic-wan/debug.sh
+    sleep 10
+done

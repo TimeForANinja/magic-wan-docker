@@ -6,6 +6,7 @@ def generate_frr_config(config_path, frr_config_path):
         config = yaml.safe_load(file)
 
     my_idx = config['idx']
+    router_net = config['router_net']
 
     # Create FRR configuration
     frr_conf = "log syslog informational\n"
@@ -14,7 +15,7 @@ def generate_frr_config(config_path, frr_config_path):
 
     for peer in config['peers']:
         target_idx = peer['idx']
-        p2p_net = calc_p2p_net(my_idx, target_idx)
+        p2p_net = calc_p2p_net(router_net, my_idx, target_idx)
         frr_conf += f"  network {p2p_net} area 0.0.0.0\n"
 
     frr_conf += "exit\n!\n"

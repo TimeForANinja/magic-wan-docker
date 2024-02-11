@@ -5,6 +5,8 @@ def generate_wireguard_configs(config_path):
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
 
+    router_net = config['router_net']
+
     for peer in config['peers']:
         my_idx = config['idx']
         target_idx = peer['idx']
@@ -14,7 +16,7 @@ def generate_wireguard_configs(config_path):
 
         wg_conf = f"[Interface]\n"
         wg_conf += f"PrivateKey = {private_key}\n"
-        wg_conf += f"Address = {calc_p2p_net(my_idx, target_idx)}\n"
+        wg_conf += f"Address = {calc_p2p_net(router_net, my_idx, target_idx)}\n"
         wg_conf += f"ListenPort = {calc_p2p_port(my_idx, target_idx)}\n"
         wg_conf += "Table = off\n"
         wg_conf += "PostUp = sysctl -w net.ipv4.ip_forward=1\n"
@@ -22,7 +24,7 @@ def generate_wireguard_configs(config_path):
         wg_conf += f"\n"
         wg_conf += f"[Peer]\n"
         wg_conf += f"PublicKey = {public_key}\n"
-        wg_conf += f"AllowedIPs = {calc_p2p_net(target_idx, my_idx)}, 0.0.0.0/0\n"
+        wg_conf += f"AllowedIPs = {calc_p2p_net(router_net, target_idx, my_idx)}, 0.0.0.0/0\n"
         wg_conf += f"Endpoint = {destination}:{calc_p2p_port(my_idx, target_idx)}\n"
 
         interface_name = f"wg1{my_idx:02d}{target_idx:02d}"
