@@ -1,7 +1,9 @@
 version: '3'
 
 services:
-  my_container:
+  magic-wan:
+    privileged: true
+    network_mode: host
     image: ghcr.io/timeforaninja/magic-wan-docker:main
     volumes:
       - ./config.yml:/magic-wan/config.yml:ro

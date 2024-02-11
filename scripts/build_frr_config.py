@@ -10,13 +10,13 @@ def generate_frr_config(config_path, frr_config_path):
 
     # Create FRR configuration
     frr_conf = "log syslog informational\n"
-    frr_conf = "!\nrouter ospf\n"
-    frr_conf += f"  ospf router-id 0.0.0.{my_idx}\n"
+    frr_conf += "!\nrouter ospf\n"
+    frr_conf += f" ospf router-id 0.0.0.{my_idx}\n"
 
     for peer in config['peers']:
         target_idx = peer['idx']
         p2p_net = calc_p2p_net(router_net, my_idx, target_idx)
-        frr_conf += f"  network {p2p_net} area 0.0.0.0\n"
+        frr_conf += f" network {p2p_net} area 0.0.0.0\n"
 
     frr_conf += "exit\n!\n"
 
@@ -24,7 +24,8 @@ def generate_frr_config(config_path, frr_config_path):
         target_idx = peer['idx']
         interface_name = f"wg1{my_idx:02d}{target_idx:02d}"
         frr_conf += f"interface {interface_name}\n"
-        frr_conf += "  ip router ospf area 0.0.0.0\n"
+        frr_conf += " ip router ospf area 0.0.0.0\n"
+        frr_conf += " ip ospf network point-to-point\n"
         frr_conf += "exit\n"
         frr_conf += "!\n"
 
