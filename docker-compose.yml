@@ -2,7 +2,6 @@ version: '3'
 
 services:
   my_container:
-    image: magic-wan-docker
+    image: ghcr.io/timeforaninja/magic-wan-docker:main
     volumes:
-      - ./path/to/config/file/config.yml:/magic-wan/config.yml:ro
-    entrypoint: /entrypoint.sh
+      - ./config.yml:/magic-wan/config.yml:ro

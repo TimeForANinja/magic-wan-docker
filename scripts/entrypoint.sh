@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_FILE="/magic-wan/config.conf"
+CONFIG_FILE="/magic-wan/config.yml"
 
 # Paths to Python scripts
 WIREGUARD_SCRIPT="/magic-wan/build_wireguard_config.py"
